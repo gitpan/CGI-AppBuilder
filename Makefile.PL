@@ -30,10 +30,10 @@ use ExtUtils::AutoInstall (
     -version        => '0.40',
 );
 WriteMakefile(
-    ABSTRACT        => 'Configuration initializer'   ,
+    ABSTRACT        => 'CGI Application Builder'     ,
     NAME            => 'CGI::AppBuilder'             ,
-    DISTNAME        => 'CGI-AppBuilder-0.11.tar.gz'  ,
+    DISTNAME        => 'CGI-AppBuilder-0.12.tar.gz'  ,
     AUTHOR          => 'geotiger2001@yahoo.com'      ,
-    VERSION         => 0.11                          ,
+    VERSION         => 0.12                          ,
     PREREQ_PM       => {'Test::More' => 0.45,'Test::Harness' => 0.1,},
 );

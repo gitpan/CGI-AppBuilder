@@ -1,6 +1,6 @@
-AppBuilder.pm
+CGI/AppBuilder.pm
+t/AppBuilder.t
 test.pl
 Makefile.PL
-t/AppBuilder.t
-CGI-AppBuilder-0.11.readme
+CGI-AppBuilder-0.12.readme
 README

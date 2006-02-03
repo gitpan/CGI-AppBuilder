@@ -1,5 +1,5 @@
 NAME
-    CGI::AppBuilder - Configuration initializer
+    CGI::AppBuilder - CGI Application Builder
 
 SYNOPSIS
       use CGI::AppBuilder;
@@ -52,7 +52,7 @@ DESCRIPTION
 
       build_html_header - build HTML header array
       Debug::EchoMessage
-        echoMSG  - echo messages
+        echo_msg  - echo messages
         start_log - start and write message log
       CGI::Getopt
         get_inputs - read input file and/or CGI form inputs
@@ -91,17 +91,20 @@ DESCRIPTION
     It checks the parameters read from initial file for page_title,
     page_style, page_author, page_meta, top_nav, bottom_nav, and js_src.
 
-   end_app ($q, $ar, $ar_log)
+   end_app ($q, $ar, $ar_log, $nhh)
     Input variables:
 
       $q    - CGI object 
       $ar   - array ref for parameters 
       $ar_log - hash ref for log record
+      $nhh  - no html header pre-printed 
+              1 - no HTML is printed in any circumstance
+              0 - HTML header will be printed when it is possible
 
     Variables used or routines called:
 
       Debug::EchoMessage
-        echoMSG - echo messages
+        echo_msg - echo messages
         end_log - start and write message log
         set_param - get a parameter from hash array
 
@@ -118,81 +121,23 @@ DESCRIPTION
       2) writes log records to log files 
       3) close database connection if it finds DB handler in {dbh}
 
-   build_html_header ($q, $ar)
-    Input variables:
-
-      $q    - CGI object 
-      $ar   - array ref for parameters 
-
-    Variables used or routines called:
-
-      Debug::EchoMessage
-        echoMSG - echo messages
-        set_param - get a parameter from hash array
-
-    How to use:
-
-      my $ifn = 'myConfig.ini'; 
-      my ($q,$ar) = $s->get_inputs($ifn);
-      my $hrf = $self->build_html_header($q, $ar);
-
-    Return: hash array or array ref
-
-    This method performs the following tasks:
-
-      1) check the following parameters: page_title, page_style, 
-         page_meta, page_author, page_target, js_src, 
-      2) writes log records to log files 
-      3) close database connection if it finds DB handler in {dbh}
-
-   disp_form ($q, $ar)
-    Input variables:
-
-      $q    - CGI object 
-      $ar   - array ref for parameters 
-
-    Variables used or routines called:
-
-      Debug::EchoMessage
-        echoMSG - echo messages
-        set_param - get a parameter from hash array
-
-    How to use:
-
-      my $ifn = 'myConfig.ini'; 
-      my ($q,$ar) = $s->get_inputs($ifn);
-      $self->disp_form($q, $ar);
-
-    Return: none
-
-    This method expects the following varialbes:
-
-      gi - GUI items
-      gc - GUI columns
-      gf - GUI form
-      db - database connection varialbes (optional)
-      vars_keep - variables separated by comma for hidden variables
-
-    This method performs the following tasks:
-
-      1) checks whether GI, GC and GF variables being defined. 
-      2) replaces AR, DB, GI, and GC variables with their contents
-      3) builds GF elements 
-      4) add hidden variables
-      5) print the form
-
 HISTORY
     * Version 0.10
         This version is to extract out the app methods from CGI::Getopt
         class. It was too much for CGI::Getopt to include the start_app,
         end_app, build_html_header, and disp_form methods.
 
-    * Version 0.11
-        Rewrote start_app method so that content-type can be changed.
+          0.11 Rewrote start_app method so that content-type can be changed.
+          0.12 Moved disp_form to CGI::AppBuilder::Form,
+               moved build_html_header to CGI::AppBuilder::Header, and 
+               imported all the methods in sub-classes into this class.
+
+    * Version 0.20
 
 SEE ALSO (some of docs that I check often)
-        CGI::Getopt, Oracle::Loader, Oracle::Trigger, CGI::AppBuilder,
-        File::Xcopy, Debug::EchoMessage
+        Oracle::Loader, Oracle::Trigger, CGI::Getopt, File::Xcopy,
+        CGI::AppBuilder, CGI::AppBuilder::Message, CGI::AppBuilder::Log,
+        CGI::AppBuilder::Config, etc.
 
 AUTHOR
         Copyright (c) 2005 Hanming Tu. All rights reserved.

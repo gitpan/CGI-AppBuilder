@@ -12,8 +12,12 @@ my $obj = CGI::AppBuilder->new;
 
 isa_ok($obj, "CGI::AppBuilder");
 
-my @md = @CGI::AppBuilder::EXPORT_OK;
-foreach my $m (@md) {
+diag("Test export_ok'ed methods...");
+foreach my $m (@CGI::AppBuilder::EXPORT_OK) {
+    ok($obj->can($m), "$class->can('$m')");
+}
+diag("Test imported methods...");
+foreach my $m (@CGI::AppBuilder::IMPORT_OK) {
     ok($obj->can($m), "$class->can('$m')");
 }
 
